@@ -33,12 +33,12 @@ function Form() {
     return (
         <>
 
-            <h1>Aggiungi un Post:</h1>
-
             <form onSubmit={handleSubmit}>
 
+                <h1>Aggiungi un Post:</h1>
+
                 <div className="form-element">
-                    <span>Titolo:</span>
+                    <label>Titolo:</label>
                     <input
                         type="text"
                         value={postData.title}
@@ -47,7 +47,7 @@ function Form() {
                 </div>
 
                 <div className="form-element">
-                    <span>Immagine:</span>
+                    <label>Immagine:</label>
                     <input
                         type="text"
                         value={postData.image}
@@ -56,7 +56,7 @@ function Form() {
                 </div>
 
                 <div className="form-element">
-                    <span>Contenuto:</span>
+                    <label>Contenuto:</label>
                     <input
                         type="text"
                         value={postData.content}
