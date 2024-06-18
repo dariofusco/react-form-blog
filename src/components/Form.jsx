@@ -3,41 +3,80 @@ import { FaTrashAlt } from "react-icons/fa";
 
 function Form() {
 
-    const [titles, setTitles] = useState([]);
-    const [title, setTitle] = useState('');
+    const [posts, setPosts] = useState([]);
+    //const [title, setTitle] = useState('');
+
+    const defaultPostData = {
+        title: "",
+        image: "",
+        content: ""
+    }
+
+    const [postData, setPostData] = useState(defaultPostData);
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        setTitles(array => ([...array, title]));
-        setTitle('');
+        setPosts(array => ([...array, postData]));
+        //setTitle('');
+        setPostData(defaultPostData);
     }
 
-    const removeTitle = (indexToDelete) => {
-        setTitles(array => array.filter((title, index) => index !== indexToDelete));
+    const changePostData = (key, newValue) => {
+        setPostData(data => ({ ...data, [key]: newValue }));
+    }
+
+    const removePost = (indexToDelete) => {
+        setPosts(array => array.filter((post, index) => index !== indexToDelete));
     }
 
     return (
         <>
+
+            <h1>Aggiungi un Post:</h1>
+
             <form onSubmit={handleSubmit}>
+
                 <div className="form-element">
-                    Titolo del post:
+                    <span>Titolo:</span>
                     <input
                         type="text"
-                        value={title}
-                        onChange={event => setTitle(event.target.value)}
+                        value={postData.title}
+                        onChange={event => changePostData('title', event.target.value)}
                     />
                 </div>
+
+                <div className="form-element">
+                    <span>Immagine:</span>
+                    <input
+                        type="text"
+                        value={postData.image}
+                        onChange={event => changePostData('image', event.target.value)}
+                    />
+                </div>
+
+                <div className="form-element">
+                    <span>Contenuto:</span>
+                    <input
+                        type="text"
+                        value={postData.content}
+                        onChange={event => changePostData('content', event.target.value)}
+                    />
+                </div>
+
                 <button>Aggiungi</button>
+
             </form>
-            <p><strong>Post:</strong></p>
-            <ul>
-                {titles.map((title, index) => (
-                    <li key={index}>
-                        {title} <button onClick={() => removeTitle(index)}><FaTrashAlt /></button>
-                    </li>
-                ))}
-            </ul>
+
+            {posts.map((post, index) => (
+                <div className="card" key={index}>
+                    <img src={post.image} alt="" />
+                    <h3>{post.title}</h3>
+                    <p>{post.content}</p>
+                    <button onClick={() => removePost(index)}><FaTrashAlt /></button>
+                </div>
+            ))}
+
         </>
     )
 }
