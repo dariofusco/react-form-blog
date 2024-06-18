@@ -68,14 +68,19 @@ function Form() {
 
             </form>
 
-            {posts.map((post, index) => (
-                <div className="card" key={index}>
-                    <img src={post.image} alt="" />
-                    <h3>{post.title}</h3>
-                    <p>{post.content}</p>
-                    <button onClick={() => removePost(index)}><FaTrashAlt /></button>
-                </div>
-            ))}
+
+            <div className="container">
+
+                {posts.map((post, index) => (
+                    <div className="card" key={index}>
+                        <img src={post.image} alt="" />
+                        <h3>{post.title}</h3>
+                        <p>{post.content}</p>
+                        <button onClick={() => removePost(index)}><FaTrashAlt /></button>
+                    </div>
+                ))}
+
+            </div>
 
         </>
     )
